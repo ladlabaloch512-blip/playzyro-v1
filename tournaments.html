@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tournaments & Schedule - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT='v1';</script>
-<script src="assets/js/app.js?v=2026-11-19b"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body>
 <header class="site-head"><div class="head-in">
@@ -36,17 +37,27 @@
 <h2 class="sec-title" style="font-size:28px">Active &amp; Upcoming <span>Tournaments</span></h2>
 <div class="tgrid" id="tgrid"></div>
 <h2 class="sec-title" style="font-size:28px;margin-top:36px">Weekly <span>Schedule</span></h2>
-<div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Event Name</th><th>Game Mode</th><th>Map</th><th>Status</th><th>Action</th></tr></thead><tbody id="sched"></tbody></table></div>
+<div class="tbl-wrap stack-wrap"><table class="stack"><thead><tr><th>Date</th><th>Event Name</th><th>Game Mode</th><th>Map</th><th>Status</th><th>Action</th></tr></thead><tbody id="sched"></tbody></table></div>
 </div>
 <aside class="side-box"><h3>Last Event Champions</h3>
-<div class="ph"><span>Team Photo Placeholder</span></div><p class="cap">Tournament Champions - Winner: To be confirmed</p>
-<div class="ph"><span>Winner Photo Placeholder</span></div><p class="cap">MVP of the Week - Winner: To be confirmed</p>
+<div class="team-frame"><svg class="pf-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path transform="translate(-1.5 6) scale(.62)" opacity=".55" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path transform="translate(11.5 6) scale(.62)" opacity=".55" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="pf-lab">Team Photo</span><span class="pf-sub">To be provided by the client</span></div><p class="cap">Tournament Champions - Winner: To be confirmed</p>
+<div class="photo-frame"><svg class="pf-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="pf-lab">Winner Photo</span><span class="pf-sub">To be provided by the client</span></div><p class="cap">MVP of the Week - Winner: To be confirmed</p>
 </aside></div>
+<section class="block"><h2 class="sec-title">How Squads <span>Work</span></h2>
+<div class="steps">
+<div class="step"><span class="num">1</span><h3>Create or Join</h3><p>The captain creates the squad and shares its join code. Join a squad with that code while logged in.</p></div>
+<div class="step"><span class="num">2</span><h3>Fill the Squad</h3><p>A squad holds 4 to 5 players. Each player has one active squad in this stage.</p></div>
+<div class="step"><span class="num">3</span><h3>Apply Together</h3><p>Squads with at least 4 members apply from the tournament page. The admin reviews and assigns squads.</p></div>
+<div class="step"><span class="num">4</span><h3>Get the Room</h3><p>Assigned squads get the Room ID and password on their dashboard at match time.</p></div>
+</div></section>
+<section class="cta-band"><h2>No Squad <span style="color:var(--orange)">Yet?</span></h2>
+<p>Create your account, then build a squad as captain or join one with a join code.</p>
+<a class="btn" href="auth.html#signup">Sign Up</a><a class="btn ghost" href="squad-create.html">Create a Squad</a></section>
 </main>
 <footer class="site"><div class="foot-in">
 <div><h3>PlayZyro</h3><p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p><p style="margin-top:8px">playzyro.xyz</p></div>
 <div><h3>Quick Links</h3><a href="index.html">Home</a><a href="tournaments.html">Tournaments &amp; Schedule</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Log In / Sign Up</a></div>
-<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact: [CONTACT EMAIL PLACEHOLDER]</p></div>
+<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact email: to be provided by the client</p></div>
 </div>
 <p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <div class="foot-bottom">&copy; <span id="yr"></span> PlayZyro. All rights reserved.</div>
@@ -58,7 +69,19 @@
  document.querySelectorAll('[data-nav-admin]').forEach(function(e){e.style.display=(u&&u.role==='admin')?'':'none';});
  document.querySelectorAll('[data-auth-btns]').forEach(function(e){e.style.display=u?'none':'';});
  var b=document.getElementById('burger'),n=document.getElementById('mainnav');
- if(b&&n){b.addEventListener('click',function(){n.classList.toggle('open');});}
+ if(b&&n){
+  var bd=document.createElement('div');bd.className='drawer-backdrop';document.body.appendChild(bd);
+  var dh=document.createElement('div');dh.className='drawer-head';dh.innerHTML='<span class="drawer-title">Menu</span><button class="drawer-close" type="button" aria-label="Close menu">&times;</button>';n.insertBefore(dh,n.firstChild);
+  var df=document.createElement('div');df.className='drawer-foot';
+  df.innerHTML=u?'<span class="drawer-user">Signed in as <b>'+PZ.esc(u.username)+'</b></span><a class="btn ghost block" href="#" data-logout>Log Out</a>':'<a class="btn block" href="auth.html">Log In</a><a class="btn ghost block" href="auth.html#signup" style="margin-top:10px">Sign Up</a>';
+  n.appendChild(df);
+  var openD=function(){n.classList.add('open');bd.classList.add('show');};
+  var closeD=function(){n.classList.remove('open');bd.classList.remove('show');};
+  b.addEventListener('click',function(){n.classList.contains('open')?closeD():openD();});
+  bd.addEventListener('click',closeD);
+  dh.querySelector('.drawer-close').addEventListener('click',closeD);
+  n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeD);});
+ }
 })();
 </script><script>
 (function(){
@@ -76,18 +99,18 @@
    var btn = t.status==='Registration Open' ? '<a class="btn block" href="tournament.html?id='+t.id+'">Register Now</a>'
      : (isResult(t) ? '<a class="btn ghost block" href="tournament.html?id='+t.id+'">View Lobby</a>'
      : '<a class="btn ghost block" href="tournament.html?id='+t.id+'">View Details</a>');
-   return '<article class="tcard"><span class="fc" aria-hidden="true"></span><h3>'+PZ.esc(t.name)+'</h3>'+
+   return '<article class="tcard"><span class="fc" aria-hidden="true"></span><div class="poster-art"><svg class="art-emblem" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="rgba(16,16,12,.55)" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg><span class="art-cap">Tournament Poster</span></div><h3>'+PZ.esc(t.name)+'</h3>'+
    '<div class="meta-line"><span class="lab">Status</span><span class="val '+(t.status==='Registration Open'?'green':'amber')+'">'+PZ.esc(t.status)+'</span></div>'+
    '<div class="meta-line"><span class="lab">Start Date</span><span class="val">'+PZ.esc(t.dateText||'To be confirmed')+'</span></div>'+
    '<div class="meta-line"><span class="lab">Prize Pool</span><span class="val">TBD</span></div>'+
-   '<div class="ph"><span>Poster Placeholder</span></div>'+btn+'</article>';
+   btn+'</article>';
   }).join('') || '<div class="empty">'+(filter==='results'?'No results yet. Finished tournaments will appear here.':'No tournaments match. Tournaments added by the admin will appear here.')+'</div>';
   document.getElementById('sched').innerHTML=PZ.db.tournaments.map(function(t){
    var act = t.status==='Registration Open'
      ? '<a class="btn small" href="tournament.html?id='+t.id+'">Register</a>'
      : '<a class="btn ghost small" href="tournament.html?id='+t.id+'">Details</a>';
-   return '<tr><td>'+PZ.esc(t.dateText||'Date placeholder')+'</td><td>'+PZ.esc(t.name)+'</td><td>'+PZ.esc(t.mode||'Squad')+'</td><td>'+PZ.esc(t.map||'To be confirmed')+'</td><td class="status '+(t.status==='Registration Open'?'open':'up')+'">'+PZ.esc(t.status)+'</td><td>'+act+'</td></tr>';
-  }).join('') || '<tr><td colspan="6">No schedule entries yet.</td></tr>';
+   return '<tr><td data-label="Date">'+PZ.esc(t.dateText||'Date to be confirmed')+'</td><td data-label="Event Name">'+PZ.esc(t.name)+'</td><td data-label="Game Mode">'+PZ.esc(t.mode||'Squad')+'</td><td data-label="Map">'+PZ.esc(t.map||'To be confirmed')+'</td><td data-label="Status" class="status '+(t.status==='Registration Open'?'open':'up')+'">'+PZ.esc(t.status)+'</td><td data-label="Action">'+act+'</td></tr>';
+  }).join('') || '<tr><td colspan="6" data-label="Schedule">No schedule entries yet.</td></tr>';
  }
  document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){
    document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('active');});

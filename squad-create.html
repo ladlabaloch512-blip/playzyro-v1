@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create Squad - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20a">
 <script>window.PZ_VARIANT='v1';</script>
-<script src="assets/js/app.js?v=2026-11-19b"></script>
+<script src="assets/js/app.js?v=2026-11-20a"></script>
 </head>
 <body>
 <header class="site-head"><div class="head-in">
@@ -32,7 +33,7 @@
 <button class="btn" type="submit" style="margin-top:16px">Create Squad</button> <a class="btn ghost" href="squad-join.html">Join by Code instead</a></form></div></section></main><footer class="site"><div class="foot-in">
 <div><h3>PlayZyro</h3><p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p><p style="margin-top:8px">playzyro.xyz</p></div>
 <div><h3>Quick Links</h3><a href="index.html">Home</a><a href="tournaments.html">Tournaments &amp; Schedule</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Log In / Sign Up</a></div>
-<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact: [CONTACT EMAIL PLACEHOLDER]</p></div>
+<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact email: to be provided by the client</p></div>
 </div>
 <p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
 <div class="foot-bottom">&copy; <span id="yr"></span> PlayZyro. All rights reserved.</div>
@@ -44,7 +45,19 @@
  document.querySelectorAll('[data-nav-admin]').forEach(function(e){e.style.display=(u&&u.role==='admin')?'':'none';});
  document.querySelectorAll('[data-auth-btns]').forEach(function(e){e.style.display=u?'none':'';});
  var b=document.getElementById('burger'),n=document.getElementById('mainnav');
- if(b&&n){b.addEventListener('click',function(){n.classList.toggle('open');});}
+ if(b&&n){
+  var bd=document.createElement('div');bd.className='drawer-backdrop';document.body.appendChild(bd);
+  var dh=document.createElement('div');dh.className='drawer-head';dh.innerHTML='<span class="drawer-title">Menu</span><button class="drawer-close" type="button" aria-label="Close menu">&times;</button>';n.insertBefore(dh,n.firstChild);
+  var df=document.createElement('div');df.className='drawer-foot';
+  df.innerHTML=u?'<span class="drawer-user">Signed in as <b>'+PZ.esc(u.username)+'</b></span><a class="btn ghost block" href="#" data-logout>Log Out</a>':'<a class="btn block" href="auth.html">Log In</a><a class="btn ghost block" href="auth.html#signup" style="margin-top:10px">Sign Up</a>';
+  n.appendChild(df);
+  var openD=function(){n.classList.add('open');bd.classList.add('show');};
+  var closeD=function(){n.classList.remove('open');bd.classList.remove('show');};
+  b.addEventListener('click',function(){n.classList.contains('open')?closeD():openD();});
+  bd.addEventListener('click',closeD);
+  dh.querySelector('.drawer-close').addEventListener('click',closeD);
+  n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeD);});
+ }
 })();
 </script><script>
 (function(){
