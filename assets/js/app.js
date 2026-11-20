@@ -3,7 +3,7 @@
    tournaments and room credentials are created through the site's own flows.
    Mirrors the later WordPress tables: users, squads, tournaments, events,
    applications, assignments, rooms. */
-window.PZ_VERSION = '2026-11-20b';
+window.PZ_VERSION = '2026-11-20c';
 (function () {
   var V = window.PZ_VARIANT || 'vx';
   var KEY = 'pz_' + V + '_db_v1';
@@ -135,26 +135,33 @@ window.PZ_VERSION = '2026-11-20b';
 function ready(f){if(document.readyState!=='loading')f();else document.addEventListener('DOMContentLoaded',f);}
 function each(sel,fn){document.querySelectorAll(sel).forEach(fn);}
 ready(function(){
-  /* S3 FAQ accordion, single-open. JS-off: answers stay fully visible. */
-  
-  each('.faq-item',function(it,i){{
-    var q=it.querySelector('.faq-q'),a=it.querySelector('.faq-a');
-    if(!q||!a||it.getAttribute('data-pz-faq'))return;
-    it.setAttribute('data-pz-faq','1');
-    var q2=q.cloneNode(true);q.parentNode.replaceChild(q2,q); /* strip R2 toggle listener; this layer owns S3 */
-    var inner=document.createElement('div');inner.className='pz-faq-in';
-    while(a.firstChild)inner.appendChild(a.firstChild);
-    a.appendChild(inner);
-    it.classList.remove('closed');
-    if(i===0)it.classList.add('pz-open');
-    q2.addEventListener('click',function(){{
-      var was=it.classList.contains('pz-open');
-      each('.faq-item',function(o){{o.classList.remove('pz-open');}});
-      if(!was)it.classList.add('pz-open');
-    }});
-  }});
+/* S3 FAQ: height-animated accordion, single-open (panel ruling).
+     Runs one tick after the R2 inline toggle script so cloning the buttons strips its listeners. */
+  setTimeout(function(){
+    var items=Array.prototype.slice.call(document.querySelectorAll('.faq-item')); if(!items.length)return;
+    function slide(it,to){
+      var a=it.querySelector('.faq-a'); if(!a)return;
+      var from=a.getBoundingClientRect().height;
+      a.style.height=to+'px';
+      if(a.animate){var an=a.animate([{height:from+'px'},{height:to+'px'}],{duration:290,easing:'ease-in-out'}); if(an&&an.finished)an.finished.catch(function(){});}
+    }
+    items.forEach(function(it,idx){
+      var q=it.querySelector('.faq-q'); if(!q)return;
+      var clean=q.cloneNode(true); q.parentNode.replaceChild(clean,q);
+      var a=it.querySelector('.faq-a'); if(!a)return;
+      if(!a.querySelector('.pz-faq-in')){var inn=document.createElement('div');inn.className='pz-faq-in';while(a.firstChild)inn.appendChild(a.firstChild);a.appendChild(inn);}
+      a.style.display='block'; a.style.overflow='hidden'; a.style.height='0px';
+      if(idx===0){it.classList.add('pz-open'); a.style.height=a.querySelector('.pz-faq-in').scrollHeight+'px';}
+      clean.addEventListener('click',function(){
+        var open=it.classList.contains('pz-open');
+        items.forEach(function(o){ if(o!==it && o.classList.contains('pz-open')){ o.classList.remove('pz-open'); slide(o,0);} });
+        if(open){ it.classList.remove('pz-open'); slide(it,0); }
+        else { it.classList.add('pz-open'); slide(it, it.querySelector('.pz-faq-in').scrollHeight); }
+      });
+    });
+  },0);
 
-  /* S2 slider motion / champion emphasis rotation */
+    /* S2 slider motion / champion emphasis rotation */
   
   (function(){
     var box=document.querySelector('#champ-slider');
