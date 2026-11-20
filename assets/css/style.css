@@ -164,6 +164,8 @@ tr:nth-child(even) td{background:#1a1a18}
 .kv{display:flex;gap:14px;margin:9px 0;font-size:16px}
 .kv .k{font-family:var(--head);text-transform:uppercase;color:var(--dim);letter-spacing:.06em;min-width:96px;font-size:14px;padding-top:2px}
 .kv .v{font-weight:600}
+.kv.code-row{flex-wrap:wrap}
+.kv .v.nowrap{white-space:nowrap}
 .member-list{list-style:none;margin:10px 0}
 .member-list li{display:flex;gap:14px;padding:7px 0;border-bottom:1px solid #26241e;font-size:16px}
 .member-list .role{font-family:var(--head);text-transform:uppercase;color:var(--dim);min-width:96px;font-size:14px;padding-top:2px}
@@ -338,8 +340,8 @@ footer.site p{color:var(--muted);font-size:14px}
   .head-actions .hicon{display:none}
   .user-chip .chip-name{display:none}
   .admin-chip .chip-col{display:none}
-  .main-nav{position:fixed;top:0;right:0;height:100dvh;width:min(320px,86vw);background:#0c0c0a;border-left:2px solid var(--line2);z-index:70;display:flex;flex-direction:column;flex-wrap:nowrap;gap:0;padding:0 0 18px;margin-left:0;transform:translateX(105%);transition:transform .35s ease;overflow-y:auto}
-  .main-nav.open{transform:translateX(0)}
+  .main-nav{position:fixed;top:0;right:0;height:100dvh;width:min(320px,86vw);background:#0c0c0a;border-left:2px solid var(--line2);z-index:70;display:flex;flex-direction:column;flex-wrap:nowrap;gap:0;padding:0 0 18px;margin-left:0;transform:translateX(105%);visibility:hidden;transition:transform .35s ease,visibility 0s linear .35s;overflow-y:auto}
+  .main-nav.open{transform:translateX(0);visibility:visible;transition:transform .35s ease,visibility 0s}
   .main-nav a{padding:12px 20px;font-size:17px;border-bottom:1px solid #211e15}
   .main-nav a.active{color:var(--orange);border-bottom:1px solid #211e15;box-shadow:inset 4px 0 0 var(--orange)}
   .admin-boxed{margin:14px 20px 4px;text-align:center}
@@ -366,7 +368,8 @@ footer.site p{color:var(--muted);font-size:14px}
   table.stack td::before{content:attr(data-label);font-family:var(--head);text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--dim);text-align:left;flex:none;padding-top:2px}
   /* Admin tables: contained scroll, sticky first column, visible hint */
   .scroll-hint{display:block;color:var(--dim);font-size:13px;margin:0 0 8px;font-family:var(--head);text-transform:uppercase;letter-spacing:.06em}
-  .apanel .tbl-wrap{overflow-x:auto}
+  .apanel{min-width:0}
+  .apanel .tbl-wrap{overflow-x:auto;max-width:100%}
   .apanel table{min-width:540px}
   .apanel th:first-child,.apanel td:first-child{position:sticky;left:0;z-index:1}
   .apanel th:first-child{background:#2c2a24}
