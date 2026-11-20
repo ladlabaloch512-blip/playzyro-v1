@@ -490,3 +490,12 @@ label{letter-spacing:.09em}
 .pz-reveal{animation:pzReveal .5s ease-out}
 @keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
 
+/* ===== Phone points P-01/P-02/P-03 (Snow phone check, 2026-11-20) ===== */
+@media(max-width:640px){
+.cta-band .btn{display:block;width:100%;margin:0 0 16px}
+.cta-band .btn:last-child{margin-bottom:0}
+.foot-in{grid-template-columns:1fr}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tabs button{width:100%}
+}
+

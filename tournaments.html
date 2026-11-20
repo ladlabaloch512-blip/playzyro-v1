@@ -6,9 +6,9 @@
 <title>Tournaments & Schedule - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20j">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20k">
 <script>window.PZ_VARIANT='v1';</script>
-<script src="assets/js/app.js?v=2026-11-20j"></script>
+<script src="assets/js/app.js?v=2026-11-20k"></script>
 </head>
 <body>
 <header class="site-head"><div class="head-in">
@@ -34,7 +34,7 @@
 <button data-f="all" class="active">All Events</button><button data-f="Registration Open">Active</button><button data-f="Upcoming">Upcoming</button><button data-f="results">Results</button>
 </div><select class="mode-sel" id="mode-sel" aria-label="Filter by game mode"></select><input class="search" id="search" type="search" placeholder="Search tournaments..."></div>
 <div class="layout-side"><div>
-<h2 class="sec-title" style="font-size:28px">Active &amp; Upcoming <span>Tournaments</span></h2>
+<h2 class="sec-title" id="t-heading" style="font-size:28px">Active &amp; Upcoming <span>Tournaments</span></h2>
 <div class="tgrid" id="tgrid"></div>
 </div>
 <aside class="side-box"><h3>Last Event Champions</h3>
@@ -86,6 +86,7 @@
 </script><script>
 (function(){
  var filter='all',q='',mode='all';
+ var HEADS={'all':'Active &amp; Upcoming <span>Tournaments</span>','Registration Open':'Active <span>Tournaments</span>','Upcoming':'Upcoming <span>Tournaments</span>','results':'<span>Results</span>'};
  var modes=[]; PZ.db.tournaments.forEach(function(t){var m=t.mode||'Squad'; if(modes.indexOf(m)<0)modes.push(m);});
  document.getElementById('mode-sel').innerHTML='<option value="all">Mode (All)</option>'+modes.map(function(m){return '<option value="'+PZ.esc(m)+'">Mode ('+PZ.esc(m)+')</option>';}).join('');
  function isResult(t){return /completed|finished/i.test(t.status);}
@@ -114,7 +115,7 @@
  }
  document.querySelectorAll('#tabs button').forEach(function(b){b.addEventListener('click',function(){
    document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('active');});
-   b.classList.add('active'); filter=b.getAttribute('data-f'); render();
+   b.classList.add('active'); filter=b.getAttribute('data-f'); document.getElementById('t-heading').innerHTML=HEADS[filter]||HEADS.all; render();
  });});
  document.getElementById('mode-sel').addEventListener('change',function(e){mode=e.target.value;render();});
  document.getElementById('search').addEventListener('input',function(e){q=e.target.value.toLowerCase();render();});
