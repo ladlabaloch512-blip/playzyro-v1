@@ -6,9 +6,9 @@
 <title>Admin Panel - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20g">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20h">
 <script>window.PZ_VARIANT='v1';</script>
-<script src="assets/js/app.js?v=2026-11-20g"></script>
+<script src="assets/js/app.js?v=2026-11-20h"></script>
 </head>
 <body>
 <header class="site-head"><div class="head-in">
@@ -25,6 +25,8 @@
 <span class="admin-boxed">Admin Panel</span>
 </nav>
 <div class="head-actions">
+<button class="icon-btn ic" type="button" aria-label="Notifications"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5S10.5 3.17 10.5 4v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></button>
+<button class="icon-btn ic" type="button" aria-label="Settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button>
 <span class="user-chip admin-chip"><span class="avatar" id="admin-avatar" aria-hidden="true">A</span><span class="chip-col"><span class="chip-role">Admin</span><span class="chip-name" id="admin-name">Admin</span></span> <a href="#" id="admin-logout" style="color:inherit;text-decoration:underline">Log out</a></span>
 </div></div></header>
 
@@ -51,6 +53,11 @@
 <form id="assign-form"><label for="as-t">Select Tournament</label><select id="as-t"></select>
 <label for="as-s">Select Squad / Team</label><select id="as-s"></select>
 <div id="assign-msg"></div><button class="btn" type="submit" style="margin-top:16px">Assign Team</button></form></section>
+<section class="apanel" id="panel-events"><div class="panel-head"><h2>Upcoming Events Manager</h2><input class="panel-search" id="events-search" type="search" placeholder="Search..." aria-label="Search events"></div>
+<p class="scroll-hint">Scroll sideways for all columns</p><div class="tbl-wrap"><table><thead><tr><th>Event Title</th><th>Date</th><th>Slots</th><th>Status</th><th></th></tr></thead><tbody id="events-body"></tbody></table></div>
+<form id="e-form"><label for="ne-title">Event Title</label><input id="ne-title" required>
+<label for="ne-date">Date Text</label><input id="ne-date" placeholder="Date to be confirmed">
+<div id="e-msg"></div><button class="btn small" type="submit" style="margin-top:12px">Add Event</button></form></section>
 <section class="apanel" id="panel-publish"><h2>Publish Room ID &amp; Password</h2>
 <form id="room-form"><label for="rm-t">Select Tournament</label><select id="rm-t"></select>
 <div class="form-grid"><div><label for="rm-id">Room ID</label><input id="rm-id" required></div>
@@ -67,11 +74,6 @@
 <p class="counts" id="squads-count"></p>
 <p class="scroll-hint">Scroll sideways for all columns</p><div class="tbl-wrap"><table><thead><tr><th>Squad Name</th><th>Captain</th><th>Members</th><th>Registered In</th><th>Actions</th></tr></thead><tbody id="squads-body"></tbody></table></div>
 <div class="pager" id="squads-pager"></div></section>
-<section class="apanel" id="panel-events"><div class="panel-head"><h2>Upcoming Events Manager</h2><input class="panel-search" id="events-search" type="search" placeholder="Search..." aria-label="Search events"></div>
-<p class="scroll-hint">Scroll sideways for all columns</p><div class="tbl-wrap"><table><thead><tr><th>Event Title</th><th>Date</th><th>Slots</th><th>Status</th><th></th></tr></thead><tbody id="events-body"></tbody></table></div>
-<form id="e-form"><label for="ne-title">Event Title</label><input id="ne-title" required>
-<label for="ne-date">Date Text</label><input id="ne-date" placeholder="Date to be confirmed">
-<div id="e-msg"></div><button class="btn small" type="submit" style="margin-top:12px">Add Event</button></form></section>
 </div>
 </div></div></main>
 <footer class="site"><div class="foot-in">
