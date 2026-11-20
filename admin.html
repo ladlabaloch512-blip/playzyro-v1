@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<script>window.PZ_VARIANT='v1';</script>
+<script src="assets/js/app.js?v=2026-11-19b"></script>
+</head>
+<body>
+<header class="site-head"><div class="head-in">
+<a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg width="38" height="42" viewBox="0 0 40 44" role="img" aria-label="PlayZyro shield logo"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="#1c1a14" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg>
+<span class="word">PLAY<b>ZYRO</b></span></a>
+<button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+<nav class="main-nav admin-nav" id="mainnav">
+<a href="#admin-top">Dashboard</a>
+<a href="#panel-tournaments">Tournaments</a>
+<a href="#panel-squads">Squads</a>
+<a href="#panel-users">Players</a>
+<a href="#panel-events">Events</a>
+<span class="admin-boxed">Admin Panel</span>
+</nav>
+<div class="head-actions">
+<button class="hicon" type="button" aria-label="Notifications"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 22c1.2 0 2.2-1 2.2-2.2H9.8C9.8 21 10.8 22 12 22zm6.3-4.7l-1.6-2.2V9.6c0-3.1-1.5-5.3-3.5-5.9V3.2C13.2 2.5 12.7 2 12 2s-1.2.5-1.2 1.2v.5C8.8 4.3 7.3 6.5 7.3 9.6v5.5l-1.6 2.2c-.3.4 0 1 .5 1h11.6c.5 0 .8-.6.5-1z"/></svg></button>
+<button class="hicon" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1"/></svg></button>
+<span class="user-chip admin-chip"><span class="avatar" id="admin-avatar" aria-hidden="true">A</span><span class="chip-col"><span class="chip-role">Admin</span><span class="chip-name" id="admin-name">Admin</span></span> <a href="#" id="admin-logout" style="color:inherit;text-decoration:underline">Log out</a></span>
+</div></div></header>
+
+<main class="wrap">
+<div class="admin-head" id="admin-top"><p class="crumb">Admin / Control Panel</p><h1 class="hd">Admin Control Panel</h1><p class="counts" id="admin-counts"></p></div>
+<div id="admin-denied"></div>
+<div id="admin-main" style="display:none">
+<div class="admin-grid">
+<div class="admin-col">
+<section class="apanel" id="panel-tournaments"><h2>Tournaments Manager</h2>
+<div class="tm-split"><div id="t-list"></div>
+<div class="tm-media"><h3 class="hd" style="font-size:19px">Dashboard</h3><p class="sub">Media Upload</p>
+<div class="media-grid">
+<div class="ph"><span>Poster Placeholder</span></div><div class="ph"><span>Winner Photo Placeholder</span></div>
+<div class="ph" style="grid-column:1/-1"><span>Team Photo Placeholder</span></div></div>
+<p style="color:var(--muted);margin-top:12px;font-size:14px">Media slots stay placeholders until the client provides posters and photos.</p>
+</div></div>
+<h3 class="hd" id="t-form-title" style="margin:18px 0 4px;font-size:19px">Create Tournament</h3>
+<form id="t-form"><div class="form-grid"><div><label for="nt-name">Name</label><input id="nt-name" required></div>
+<div><label for="nt-date">Date Text</label><input id="nt-date" placeholder="Date to be confirmed"></div>
+<div><label for="nt-mode">Mode</label><input id="nt-mode" value="Squad"></div>
+<div><label for="nt-status">Status</label><select id="nt-status"><option>Registration Open</option><option>Upcoming</option><option>Completed</option></select></div></div>
+<div id="t-msg"></div><button class="btn small" type="submit" id="t-submit" style="margin-top:14px">Add Tournament</button> <button class="btn ghost small" type="button" id="t-cancel" style="margin-top:14px;display:none">Cancel Edit</button></form></section>
+<section class="apanel" id="panel-assign"><h2>Assign Teams to Tournament</h2>
+<form id="assign-form"><label for="as-t">Select Tournament</label><select id="as-t"></select>
+<label for="as-s">Select Squad / Team</label><select id="as-s"></select>
+<div id="assign-msg"></div><button class="btn" type="submit" style="margin-top:16px">Assign Team</button></form>
+<h3 class="hd" style="margin:20px 0 6px;font-size:19px">Publish Room ID &amp; Password</h3>
+<form id="room-form"><label for="rm-t">Select Tournament</label><select id="rm-t"></select>
+<div class="form-grid"><div><label for="rm-id">Room ID</label><input id="rm-id" required></div>
+<div><label for="rm-pass">Password</label><input id="rm-pass" required></div></div>
+<div id="room-msg"></div><button class="btn" type="submit" style="margin-top:14px">Publish Room</button></form>
+<div id="room-list" style="margin-top:12px"></div></section>
+<section class="apanel" id="panel-events"><div class="panel-head"><h2>Upcoming Events Manager</h2><input class="panel-search" id="events-search" type="search" placeholder="Search..." aria-label="Search events"></div>
+<div class="tbl-wrap"><table><thead><tr><th>Event Title</th><th>Date</th><th>Slots</th><th>Status</th><th></th></tr></thead><tbody id="events-body"></tbody></table></div>
+<form id="e-form"><label for="ne-title">Event Title</label><input id="ne-title" required>
+<label for="ne-date">Date Text</label><input id="ne-date" placeholder="Date to be confirmed">
+<div id="e-msg"></div><button class="btn small" type="submit" style="margin-top:12px">Add Event</button></form></section>
+</div>
+<div class="admin-col">
+<section class="apanel" id="panel-users"><div class="panel-head"><h2>Users Manager</h2><input class="panel-search" id="users-search" type="search" placeholder="Search..." aria-label="Search users"></div>
+<p class="counts" id="users-count"></p>
+<div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Username</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody id="users-body"></tbody></table></div>
+<div class="pager" id="users-pager"></div></section>
+<section class="apanel" id="panel-squads"><div class="panel-head"><h2>Squads Manager</h2><input class="panel-search" id="squads-search" type="search" placeholder="Search..." aria-label="Search squads"></div>
+<p class="counts" id="squads-count"></p>
+<div class="tbl-wrap"><table><thead><tr><th>Squad Name</th><th>Captain</th><th>Members</th><th>Registered In</th><th>Actions</th></tr></thead><tbody id="squads-body"></tbody></table></div>
+<div class="pager" id="squads-pager"></div></section>
+</div>
+</div></div></main>
+<footer class="site"><div class="foot-in">
+<div><h3>PlayZyro</h3><p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p><p style="margin-top:8px">playzyro.xyz</p></div>
+<div><h3>Quick Links</h3><a href="index.html">Home</a><a href="tournaments.html">Tournaments &amp; Schedule</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Log In / Sign Up</a></div>
+<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact: [CONTACT EMAIL PLACEHOLDER]</p></div>
+</div>
+<p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<div class="foot-bottom">&copy; <span id="yr"></span> PlayZyro. All rights reserved.</div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+(function(){
+ var b=document.getElementById('burger'),n=document.getElementById('mainnav');
+ if(b&&n){b.addEventListener('click',function(){n.classList.toggle('open');});}
+ var lo=document.getElementById('admin-logout');
+ if(lo){lo.addEventListener('click',function(e){e.preventDefault();PZ.logout();});}
+})();
+</script><script>
+(function(){
+ var u=PZ.session();
+ var denied=document.getElementById('admin-denied');
+ if(!u){ location.href='auth.html'; return; }
+ if(u.role!=='admin'){ denied.innerHTML='<div class="msg err" style="max-width:720px">Admin access only. You are logged in as '+PZ.esc(u.username)+', which is not an admin account. Log in with an admin account to open the Admin Panel. Demo admin (preview only): demo_admin / demo1234</div>'; return; }
+ document.getElementById('admin-main').style.display='';
+ document.getElementById('admin-name').textContent=u.username;
+ document.getElementById('admin-avatar').textContent=u.username.charAt(0).toUpperCase();
+ var PAGE=5;
+ var usersQ='',usersPage=1,squadsQ='',squadsPage=1,eventsQ='',editingT=null,editingU=null;
+ var PENCIL='<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M3 17.2V21h3.8L17.9 9.9l-3.8-3.8L3 17.2zM20.7 7c.4-.4.4-1 0-1.4l-2.4-2.4a1 1 0 0 0-1.4 0l-1.8 1.8 3.8 3.8L20.7 7z"/></svg>';
+ var BIN='<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>';
+ function counts(){
+  document.getElementById('admin-counts').innerHTML='Total Users: <b>'+PZ.db.users.length+'</b> &nbsp;|&nbsp; Registered Squads: <b>'+PZ.db.squads.length+'</b> &nbsp;|&nbsp; Tournaments: <b>'+PZ.db.tournaments.length+'</b>';
+  document.getElementById('users-count').textContent=PZ.db.users.length+' users in the data layer';
+  document.getElementById('squads-count').textContent=PZ.db.squads.length+' squads in the data layer';
+ }
+ function pagerHTML(page,pages,attr){
+  if(pages<=1)return '';
+  var h='<button class="pg-btn" data-'+attr+'="prev"'+(page<=1?' disabled':'')+'>&lsaquo;</button>';
+  for(var i=1;i<=pages;i++){h+='<button class="pg-btn'+(i===page?' active':'')+'" data-'+attr+'="'+i+'">'+i+'</button>';}
+  h+='<button class="pg-btn" data-'+attr+'="next"'+(page>=pages?' disabled':'')+'>&rsaquo;</button>';
+  return h;
+ }
+ function wirePager(el,attr,get,set){
+  el.querySelectorAll('[data-'+attr+']').forEach(function(b){b.addEventListener('click',function(){
+   var v=b.getAttribute('data-'+attr); var p=get();
+   if(v==='prev')p--; else if(v==='next')p++; else p=parseInt(v,10);
+   set(p); render();
+  });});
+ }
+ function renderTournaments(){
+  function pillCls(s){return s==='Registration Open'?'pill open':(s==='Completed'?'pill done':'pill up');}
+  function row(t){
+   return '<div class="list-row"><span class="grow">'+PZ.esc(t.name)+' <span style="color:var(--muted)">('+PZ.esc(t.dateText||'Date to be confirmed')+')</span></span>'+
+   '<button class="icon-btn ic" data-tedit="'+t.id+'" aria-label="Edit tournament" title="Edit">'+PENCIL+'</button>'+
+   '<button class="icon-btn ic danger" data-tdel="'+t.id+'" aria-label="Delete tournament" title="Delete">'+BIN+'</button>'+
+   '<button class="pill '+pillCls(t.status)+'" data-tpill="'+t.id+'" title="Click to change status">'+PZ.esc(t.status)+'</button></div>';
+  }
+  var act=PZ.db.tournaments.filter(function(t){return t.status==='Registration Open'||t.status==='Upcoming';});
+  var draft=PZ.db.tournaments.filter(function(t){return !(t.status==='Registration Open'||t.status==='Upcoming');});
+  document.getElementById('t-list').innerHTML=
+   '<div class="group-bar">Active</div>'+(act.map(row).join('')||'<p class="empty-line">No active tournaments.</p>')+
+   '<div class="group-bar">Draft</div>'+(draft.map(row).join('')||'<p class="empty-line">No draft tournaments.</p>');
+  document.querySelectorAll('[data-tpill]').forEach(function(b){b.addEventListener('click',function(){
+   var t=PZ.db.tournaments.find(function(x){return x.id===b.getAttribute('data-tpill');}); if(!t)return;
+   var order=['Registration Open','Upcoming','Completed']; var i=order.indexOf(t.status);
+   t.status=order[(i+1)%order.length]; PZ.save(); PZ.toast('Status: '+t.status); render();
+  });});
+  document.querySelectorAll('[data-tdel]').forEach(function(b){b.addEventListener('click',function(){
+   var id=b.getAttribute('data-tdel');
+   PZ.db.tournaments=PZ.db.tournaments.filter(function(x){return x.id!==id;});
+   if(editingT===id)cancelEdit();
+   PZ.save(); render();
+  });});
+  document.querySelectorAll('[data-tedit]').forEach(function(b){b.addEventListener('click',function(){
+   var t=PZ.db.tournaments.find(function(x){return x.id===b.getAttribute('data-tedit');}); if(!t)return;
+   editingT=t.id;
+   document.getElementById('nt-name').value=t.name;
+   document.getElementById('nt-date').value=t.dateText||'';
+   document.getElementById('nt-mode').value=t.mode||'Squad';
+   document.getElementById('nt-status').value=t.status;
+   document.getElementById('t-form-title').textContent='Edit Tournament';
+   document.getElementById('t-submit').textContent='Save Changes';
+   document.getElementById('t-cancel').style.display='';
+   document.getElementById('t-form').scrollIntoView();
+  });});
+ }
+ function cancelEdit(){
+  editingT=null;
+  document.getElementById('t-form').reset(); document.getElementById('nt-mode').value='Squad';
+  document.getElementById('t-form-title').textContent='Create Tournament';
+  document.getElementById('t-submit').textContent='Add Tournament';
+  document.getElementById('t-cancel').style.display='none';
+ }
+ function renderUsers(){
+  var q=usersQ.toLowerCase();
+  var list=PZ.db.users.filter(function(x){return x.username.toLowerCase().indexOf(q)>-1||x.id.toLowerCase().indexOf(q)>-1||x.role.indexOf(q)>-1;});
+  var pages=Math.max(1,Math.ceil(list.length/PAGE)); if(usersPage>pages)usersPage=pages; if(usersPage<1)usersPage=1;
+  var slice=list.slice((usersPage-1)*PAGE,usersPage*PAGE);
+  document.getElementById('users-body').innerHTML=slice.map(function(x){
+   var status=x.suspended?'<span class="dot bad"></span><span class="status susp">Suspended</span>':'<span class="dot ok"></span><span class="status open">Active</span>';
+   var nameCell, acts;
+   if(editingU===x.id){
+    nameCell='<input class="inline-edit" id="rename-input" value="'+PZ.esc(x.username)+'" aria-label="New username">';
+    acts='<button class="icon-btn" data-usave="'+x.id+'">Save</button> <button class="icon-btn" data-ucancel="1">Cancel</button>';
+   } else {
+    nameCell=PZ.esc(x.username);
+    acts='<button class="icon-btn" data-uedit="'+x.id+'">Edit</button> <button class="icon-btn danger" data-ususp="'+x.id+'">'+(x.suspended?'Unsuspend':'Suspend')+'</button>';
+   }
+   return '<tr><td>'+PZ.esc(x.id)+'</td><td>'+nameCell+'</td><td>'+(x.role==='admin'?'Admin':'User')+'</td><td>'+status+'</td><td class="acts">'+acts+'</td></tr>';
+  }).join('')||'<tr><td colspan="5">No users match the search.</td></tr>';
+  var pg=document.getElementById('users-pager');
+  pg.innerHTML=pagerHTML(usersPage,pages,'upage');
+  wirePager(pg,'upage',function(){return usersPage;},function(p){usersPage=p;});
+  document.querySelectorAll('[data-uedit]').forEach(function(b){b.addEventListener('click',function(){editingU=b.getAttribute('data-uedit');render();var i=document.getElementById('rename-input');if(i){i.focus();i.select();}});});
+  document.querySelectorAll('[data-ucancel]').forEach(function(b){b.addEventListener('click',function(){editingU=null;render();});});
+  document.querySelectorAll('[data-usave]').forEach(function(b){b.addEventListener('click',function(){
+   var id=b.getAttribute('data-usave'); var inp=document.getElementById('rename-input'); if(!inp)return;
+   var name=inp.value.trim(); if(!name){PZ.toast('Username cannot be empty');return;}
+   if(PZ.db.users.some(function(y){return y.id!==id&&y.username.toLowerCase()===name.toLowerCase();})){PZ.toast('That username is already taken');return;}
+   var usr=PZ.user(id); if(usr){usr.username=name;PZ.save();PZ.toast('Username updated');}
+   editingU=null; render();
+  });});
+  document.querySelectorAll('[data-ususp]').forEach(function(b){b.addEventListener('click',function(){
+   var usr=PZ.user(b.getAttribute('data-ususp')); if(!usr)return;
+   usr.suspended=!usr.suspended; PZ.save(); PZ.toast(usr.suspended?'User suspended':'User unsuspended'); render();
+  });});
+ }
+ function renderSquads(){
+  var q=squadsQ.toLowerCase();
+  var list=PZ.db.squads.filter(function(s){var cap=PZ.user(s.captainId);return s.name.toLowerCase().indexOf(q)>-1||(cap&&cap.username.toLowerCase().indexOf(q)>-1);});
+  var pages=Math.max(1,Math.ceil(list.length/PAGE)); if(squadsPage>pages)squadsPage=pages; if(squadsPage<1)squadsPage=1;
+  var slice=list.slice((squadsPage-1)*PAGE,squadsPage*PAGE);
+  document.getElementById('squads-body').innerHTML=slice.map(function(s){
+   var cap=PZ.user(s.captainId);
+   var regs=PZ.db.assignments.filter(function(a){return a.squadId===s.id;}).map(function(a){var t=PZ.db.tournaments.find(function(x){return x.id===a.tournamentId;});return t?t.name:'';}).filter(Boolean).join(', ')||'Not assigned';
+   return '<tr><td>'+PZ.esc(s.name)+'</td><td>'+PZ.esc(cap?cap.username:'Captain')+'</td><td>'+s.memberIds.length+'/5</td><td>'+PZ.esc(regs)+'</td><td class="acts"><button class="icon-btn" data-smanage="'+s.id+'">Manage</button></td></tr>';
+  }).join('')||'<tr><td colspan="5">No squads match the search.</td></tr>';
+  var pg=document.getElementById('squads-pager');
+  pg.innerHTML=pagerHTML(squadsPage,pages,'spage');
+  wirePager(pg,'spage',function(){return squadsPage;},function(p){squadsPage=p;});
+  document.querySelectorAll('[data-smanage]').forEach(function(b){b.addEventListener('click',function(){
+   var sid=b.getAttribute('data-smanage');
+   var sel=document.getElementById('as-s'); sel.value=sid;
+   var asg=PZ.db.assignments.find(function(a){return a.squadId===sid;});
+   if(asg){document.getElementById('as-t').value=asg.tournamentId;}
+   document.getElementById('panel-assign').scrollIntoView();
+   PZ.toast('Squad selected in Assign Teams');
+  });});
+ }
+ function renderEvents(){
+  var q=eventsQ.toLowerCase();
+  var list=PZ.db.events.filter(function(e){return e.title.toLowerCase().indexOf(q)>-1;});
+  document.getElementById('events-body').innerHTML=list.map(function(e){
+   return '<tr><td>'+PZ.esc(e.title)+'</td><td>'+PZ.esc(e.dateText||'Date to be confirmed')+'</td><td>To be confirmed</td><td><span class="tag">'+PZ.esc(e.status||'Upcoming')+'</span></td><td><button class="icon-btn ic danger" data-edel="'+e.id+'" aria-label="Delete event" title="Delete">'+BIN+'</button></td></tr>';
+  }).join('')||'<tr><td colspan="5">No events match the search.</td></tr>';
+  document.querySelectorAll('[data-edel]').forEach(function(b){b.addEventListener('click',function(){
+   PZ.db.events=PZ.db.events.filter(function(x){return x.id!==b.getAttribute('data-edel');}); PZ.save(); render();
+  });});
+ }
+ function fillSelects(){
+  var curT=document.getElementById('as-t').value, curS=document.getElementById('as-s').value, curR=document.getElementById('rm-t').value;
+  var topts=PZ.db.tournaments.map(function(t){return '<option value="'+t.id+'">'+PZ.esc(t.name)+'</option>';}).join('');
+  document.getElementById('as-t').innerHTML=topts; document.getElementById('rm-t').innerHTML=topts;
+  document.getElementById('as-s').innerHTML=PZ.db.squads.map(function(s){return '<option value="'+s.id+'">'+PZ.esc(s.name)+' ('+s.memberIds.length+'/5)</option>';}).join('');
+  if(curT)document.getElementById('as-t').value=curT;
+  if(curS)document.getElementById('as-s').value=curS;
+  if(curR)document.getElementById('rm-t').value=curR;
+  document.getElementById('room-list').innerHTML=Object.keys(PZ.db.rooms).map(function(tid){
+   var t=PZ.db.tournaments.find(function(x){return x.id===tid;}); var r=PZ.db.rooms[tid];
+   return '<div class="list-row"><span class="grow">'+PZ.esc(t?t.name:tid)+'</span><span>Room ID: '+PZ.esc(r.roomId)+'</span><span class="status open">Published</span></div>';
+  }).join('');
+ }
+ function render(){ counts(); renderTournaments(); renderUsers(); renderSquads(); renderEvents(); fillSelects(); }
+ document.getElementById('users-search').addEventListener('input',function(e){usersQ=e.target.value;usersPage=1;renderUsers();});
+ document.getElementById('squads-search').addEventListener('input',function(e){squadsQ=e.target.value;squadsPage=1;renderSquads();});
+ document.getElementById('events-search').addEventListener('input',function(e){eventsQ=e.target.value;renderEvents();});
+ document.getElementById('t-cancel').addEventListener('click',function(){cancelEdit();});
+ document.getElementById('t-form').addEventListener('submit',function(e){e.preventDefault();
+  var data={name:document.getElementById('nt-name').value.trim(), dateText:document.getElementById('nt-date').value.trim()||'Date to be confirmed', mode:document.getElementById('nt-mode').value.trim()||'Squad', status:document.getElementById('nt-status').value};
+  if(editingT){
+   var t=PZ.db.tournaments.find(function(x){return x.id===editingT;});
+   if(t){t.name=data.name;t.dateText=data.dateText;t.mode=data.mode;t.status=data.status;}
+   PZ.save(); PZ.toast('Tournament updated'); cancelEdit();
+  } else {
+   PZ.db.tournaments.push({id:'t'+Math.random().toString(36).slice(2,8), name:data.name, dateText:data.dateText, timeText:'', mode:data.mode, status:data.status, slots:''});
+   PZ.save(); e.target.reset(); document.getElementById('nt-mode').value='Squad'; PZ.toast('Tournament added');
+  }
+  render();
+ });
+ document.getElementById('e-form').addEventListener('submit',function(e){e.preventDefault();
+  PZ.db.events.push({id:'e'+Math.random().toString(36).slice(2,8), title:document.getElementById('ne-title').value.trim(), dateText:document.getElementById('ne-date').value.trim()||'Date to be confirmed', status:'Upcoming'});
+  PZ.save(); e.target.reset(); PZ.toast('Event added'); render();
+ });
+ document.getElementById('assign-form').addEventListener('submit',function(e){e.preventDefault();
+  var tid=document.getElementById('as-t').value, sid=document.getElementById('as-s').value, m=document.getElementById('assign-msg');
+  if(!tid||!sid){m.innerHTML='<div class="msg err">Select a tournament and a squad first.</div>';return;}
+  PZ.assign(tid,sid); m.innerHTML='<div class="msg ok">Team assigned. The squad now sees this assignment in its own panel.</div>'; PZ.toast('Team assigned'); render();
+ });
+ document.getElementById('room-form').addEventListener('submit',function(e){e.preventDefault();
+  var tid=document.getElementById('rm-t').value;
+  if(!tid){document.getElementById('room-msg').innerHTML='<div class="msg err">Select a tournament first.</div>';return;}
+  PZ.publishRoom(tid, document.getElementById('rm-id').value.trim(), document.getElementById('rm-pass').value.trim());
+  document.getElementById('room-msg').innerHTML='<div class="msg ok">Room published. Only assigned squad members can now see it, on their dashboard.</div>'; PZ.toast('Room published'); render();
+ });
+ render();
+})();
+</script></body></html>

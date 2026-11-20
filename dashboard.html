@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<script>window.PZ_VARIANT='v1';</script>
+<script src="assets/js/app.js?v=2026-11-19b"></script>
+</head>
+<body>
+<header class="site-head"><div class="head-in">
+<a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg width="38" height="42" viewBox="0 0 40 44" role="img" aria-label="PlayZyro shield logo"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="#1c1a14" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg>
+<span class="word">PLAY<b>ZYRO</b></span></a>
+<button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+<nav class="main-nav" id="mainnav">
+<a href="index.html">Home</a>
+<a href="tournaments.html">Tournaments</a>
+<a href="about.html">About</a>
+<a href="dashboard.html" class="active" data-nav-dash>Dashboard</a>
+<a href="admin.html" data-nav-admin>Admin Panel</a>
+</nav>
+<div class="head-actions">
+<span class="user-chip" data-user-chip></span>
+<span data-auth-btns><a class="login-link" href="auth.html">Log In</a> <a class="btn small" href="auth.html#signup">Sign Up</a></span>
+</div></div></header>
+
+<main class="wrap"><div class="dash-grid">
+<section class="dpanel" id="squad-panel"></section>
+<section class="dpanel"><h2>Lobby Access</h2><div id="room-area"></div>
+<h2 style="margin-top:26px">Upcoming Match</h2><div id="upcoming"></div></section>
+<section class="dpanel"><h2>My Tournaments</h2><div id="my-tournaments"></div></section>
+</div></main>
+<footer class="site"><div class="foot-in">
+<div><h3>PlayZyro</h3><p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p><p style="margin-top:8px">playzyro.xyz</p></div>
+<div><h3>Quick Links</h3><a href="index.html">Home</a><a href="tournaments.html">Tournaments &amp; Schedule</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Log In / Sign Up</a></div>
+<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact: [CONTACT EMAIL PLACEHOLDER]</p></div>
+</div>
+<p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<div class="foot-bottom">&copy; <span id="yr"></span> PlayZyro. All rights reserved.</div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+(function(){var u=window.PZ?PZ.session():null;
+ document.querySelectorAll('[data-nav-dash]').forEach(function(e){e.style.display=u?'':'none';});
+ document.querySelectorAll('[data-nav-admin]').forEach(function(e){e.style.display=(u&&u.role==='admin')?'':'none';});
+ document.querySelectorAll('[data-auth-btns]').forEach(function(e){e.style.display=u?'none':'';});
+ var b=document.getElementById('burger'),n=document.getElementById('mainnav');
+ if(b&&n){b.addEventListener('click',function(){n.classList.toggle('open');});}
+})();
+</script><script>
+(function(){
+ var u=PZ.requireAuth(); if(!u) return;
+ var sp=document.getElementById('squad-panel');
+ var s=PZ.mySquad(u.id);
+ if(!s){
+  sp.innerHTML='<h2>My Squad</h2><div class="empty">You are not in a squad yet.<br><a class="btn small" href="squad-create.html">Create Squad</a> <a class="btn ghost small" href="squad-join.html">Join by Code</a></div>';
+ } else {
+  var cap=PZ.user(s.captainId);
+  var rows=s.memberIds.map(function(mid,i){var m=PZ.user(mid);return '<li><span class="role">'+(mid===s.captainId?'Captain':'Member '+(i+1))+'</span><span>'+PZ.esc(m?m.username:'Player')+'</span></li>';}).join('');
+  sp.innerHTML='<h2>My Squad</h2>'+
+   '<div class="kv"><span class="k">Squad Name:</span><span class="v">'+PZ.esc(s.name)+'</span></div>'+
+   '<div class="kv"><span class="k">Join Code:</span><span class="v">'+PZ.esc(s.joinCode)+'</span> <button class="btn small" id="copy-code">Copy Code</button></div>'+
+   '<ul class="member-list">'+rows+'</ul>'+
+   '<div class="ph"><span>Team Photo Placeholder</span></div>'+
+   '<p style="margin-top:12px"><a href="squad.html">View My Squad</a></p>';
+  document.getElementById('copy-code').addEventListener('click',function(){
+    if(navigator.clipboard){navigator.clipboard.writeText(s.joinCode);}
+    PZ.toast('Join code copied: '+s.joinCode);
+  });
+ }
+ var mine=PZ.myTournaments(u);
+ var ra=document.getElementById('room-area');
+ if(!mine.length){
+  ra.innerHTML='<div class="hazard"><div class="hz"></div><div class="hz-body"><h3>Room ID &amp; Password</h3><div class="reveals"><b>Reveals at match time</b>Apply for a tournament and get assigned by the admin. Your room details will appear here at match time.</div></div><div class="hz"></div></div>';
+ } else {
+  ra.innerHTML=mine.map(function(t){
+   var room=PZ.roomFor(u,t.id);
+   var inner;
+   if(room){ inner='<div class="room-line"><span class="rl">Room ID:</span><span class="rv">'+PZ.esc(room.roomId)+'</span></div><div class="room-line"><span class="rl">Password:</span><span class="rv">'+PZ.esc(room.password)+'</span></div><a class="btn block" style="margin-top:14px" href="tournament.html?id='+t.id+'">Join Room</a>'; }
+   else { inner='<div class="reveals"><b>Reveals at match time</b>The admin has not published the room for this tournament yet, or your squad has not been assigned to it.</div>'; }
+   return '<div class="hazard" style="margin-bottom:16px"><div class="hz"></div><div class="hz-body"><h3>Room ID &amp; Password</h3><p style="text-align:center;color:var(--muted);margin-bottom:8px">'+PZ.esc(t.name)+'</p>'+inner+'</div><div class="hz"></div></div>';
+  }).join('');
+ }
+ document.getElementById('upcoming').innerHTML = mine.length ?
+   mine.map(function(t){return '<div class="kv"><span class="k">Tournament</span><span class="v">'+PZ.esc(t.name)+'</span></div><div class="kv"><span class="k">Starts</span><span class="v">'+PZ.esc(t.dateText||'Date to be confirmed')+'</span></div>';}).join('') :
+   '<p style="color:var(--muted)">No upcoming match yet. Your tournaments will appear here after you apply.</p>';
+ var mt=document.getElementById('my-tournaments');
+ mt.innerHTML = mine.length ? mine.map(function(t){
+   var st=PZ.isAssigned(s?s.id:'',t.id)?'Assigned':'Applied';
+   return '<div class="mini-card"><div class="ph"><span>Poster Placeholder</span></div><h3>'+PZ.esc(t.name)+' <span>('+st+')</span></h3></div>';
+ }).join('') : '<div class="empty">No tournaments yet.<br><a class="btn small" href="tournaments.html" style="margin-top:8px">Browse Tournaments</a></div>';
+})();
+</script></body></html>

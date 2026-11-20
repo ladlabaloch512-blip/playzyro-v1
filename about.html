@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - PlayZyro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-19b">
+<script>window.PZ_VARIANT='v1';</script>
+<script src="assets/js/app.js?v=2026-11-19b"></script>
+</head>
+<body>
+<header class="site-head"><div class="head-in">
+<a class="logo" href="index.html" aria-label="PlayZyro home">
+<svg width="38" height="42" viewBox="0 0 40 44" role="img" aria-label="PlayZyro shield logo"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="#1c1a14" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg>
+<span class="word">PLAY<b>ZYRO</b></span></a>
+<button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+<nav class="main-nav" id="mainnav">
+<a href="index.html">Home</a>
+<a href="tournaments.html">Tournaments</a>
+<a href="about.html" class="active">About</a>
+<a href="dashboard.html" data-nav-dash>Dashboard</a>
+<a href="admin.html" data-nav-admin>Admin Panel</a>
+</nav>
+<div class="head-actions">
+<span class="user-chip" data-user-chip></span>
+<span data-auth-btns><a class="login-link" href="auth.html">Log In</a> <a class="btn small" href="auth.html#signup">Sign Up</a></span>
+</div></div></header>
+<main class="wrap"><div class="content"><h1>About Us</h1>
+<p>PlayZyro is a PUBG gaming community. This website is the community's home online: one website for the whole community, with tournaments, schedules, upcoming events and winners, in a PUBG themed design.</p>
+<p>Players sign up and log in with their own dashboard. A team captain creates a squad of 4 to 5 members, members join through a code, and the squad applies for tournaments through the website, instead of managing everything over WhatsApp.</p>
+<p>The admin panel keeps the community organised: the admin sees every user and team, updates tournaments, adds upcoming events, and selects and assigns teams to tournaments. Assigned teams see their assignment, and the room ID and password at match time, in their own panel.</p>
+<div class="gap-box">More about the PlayZyro community: information to be provided by the client. This section will be completed when that information arrives.</div>
+</div></main><footer class="site"><div class="foot-in">
+<div><h3>PlayZyro</h3><p>Tournaments, schedules, upcoming events and winners for the PlayZyro PUBG community, in one place online.</p><p style="margin-top:8px">playzyro.xyz</p></div>
+<div><h3>Quick Links</h3><a href="index.html">Home</a><a href="tournaments.html">Tournaments &amp; Schedule</a><a href="about.html">About Us</a><a href="terms.html">Terms and Conditions</a><a href="auth.html">Log In / Sign Up</a></div>
+<div><h3>Social Links</h3><p>Social links: to be provided by the client.</p><p style="margin-top:8px">Contact: [CONTACT EMAIL PLACEHOLDER]</p></div>
+</div>
+<p class="demo-notice">Demo preview: sample accounts, tournaments and squads labelled Demo or Example are preview data only. Real tournaments, winners, posters and photos are added by the admin / provided by the client.</p>
+<div class="foot-bottom">&copy; <span id="yr"></span> PlayZyro. All rights reserved.</div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<script>
+(function(){var u=window.PZ?PZ.session():null;
+ document.querySelectorAll('[data-nav-dash]').forEach(function(e){e.style.display=u?'':'none';});
+ document.querySelectorAll('[data-nav-admin]').forEach(function(e){e.style.display=(u&&u.role==='admin')?'':'none';});
+ document.querySelectorAll('[data-auth-btns]').forEach(function(e){e.style.display=u?'none':'';});
+ var b=document.getElementById('burger'),n=document.getElementById('mainnav');
+ if(b&&n){b.addEventListener('click',function(){n.classList.toggle('open');});}
+})();
+</script></body></html>
