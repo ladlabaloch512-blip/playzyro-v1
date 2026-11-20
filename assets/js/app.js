@@ -3,7 +3,7 @@
    tournaments and room credentials are created through the site's own flows.
    Mirrors the later WordPress tables: users, squads, tournaments, events,
    applications, assignments, rooms. */
-window.PZ_VERSION = '2026-11-20a';
+window.PZ_VERSION = '2026-11-20b';
 (function () {
   var V = window.PZ_VARIANT || 'vx';
   var KEY = 'pz_' + V + '_db_v1';
@@ -128,4 +128,97 @@ window.PZ_VERSION = '2026-11-20a';
   };
   window.PZ = PZ;
   document.addEventListener('DOMContentLoaded', function () { PZ.mountUserChip(); });
+})();
+
+/* ===== PlayZyro Animations R1 (panel-approved, Chat 3) ===== */
+(function(){'use strict';
+function ready(f){if(document.readyState!=='loading')f();else document.addEventListener('DOMContentLoaded',f);}
+function each(sel,fn){document.querySelectorAll(sel).forEach(fn);}
+ready(function(){
+  /* S3 FAQ accordion, single-open. JS-off: answers stay fully visible. */
+  
+  each('.faq-item',function(it,i){{
+    var q=it.querySelector('.faq-q'),a=it.querySelector('.faq-a');
+    if(!q||!a||it.getAttribute('data-pz-faq'))return;
+    it.setAttribute('data-pz-faq','1');
+    var q2=q.cloneNode(true);q.parentNode.replaceChild(q2,q); /* strip R2 toggle listener; this layer owns S3 */
+    var inner=document.createElement('div');inner.className='pz-faq-in';
+    while(a.firstChild)inner.appendChild(a.firstChild);
+    a.appendChild(inner);
+    it.classList.remove('closed');
+    if(i===0)it.classList.add('pz-open');
+    q2.addEventListener('click',function(){{
+      var was=it.classList.contains('pz-open');
+      each('.faq-item',function(o){{o.classList.remove('pz-open');}});
+      if(!was)it.classList.add('pz-open');
+    }});
+  }});
+
+  /* S2 slider motion / champion emphasis rotation */
+  
+  (function(){
+    var box=document.querySelector('#champ-slider');
+    if(!box||box.getAttribute('data-pz-slider'))return;
+    box.setAttribute('data-pz-slider','1');
+    var prog=document.createElement('div');prog.className='pz-prog';prog.innerHTML='<i></i>';
+    box.parentNode.insertBefore(prog,box.nextSibling);
+    var fill=prog.querySelector('i');
+    function upd(){var max=box.scrollWidth-box.clientWidth;fill.style.width=(max>0?Math.round(box.scrollLeft/max*100):0)+'%';}
+    box.addEventListener('scroll',upd,{passive:true});upd();
+    var paused=false,resume=null;
+    function pause(){paused=true;if(resume)clearTimeout(resume);resume=setTimeout(function(){paused=false;},9000);}
+    box.addEventListener('pointerdown',pause);box.addEventListener('touchstart',pause,{passive:true});box.addEventListener('wheel',pause,{passive:true});
+    setInterval(function(){
+      if(paused||document.hidden)return;
+      var max=box.scrollWidth-box.clientWidth;if(max<=10)return;
+      if(box.scrollLeft>=max-10)box.scrollTo({left:0,behavior:'smooth'});
+      else box.scrollBy({left:340,behavior:'smooth'});
+    },5500);
+  })();
+
+  /* S1 drawer: Esc closes an open drawer; burger glyph swaps to X while open */
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    var bd=document.querySelector('.drawer-backdrop.show,.drawer-backdrop.open,.nav-backdrop');
+    var open=document.querySelector('.main-nav.open,.drawer.open')||document.body.classList.contains('nav-open');
+    if(open){
+      var x=document.querySelector('.drawer.open .drawer-close,.drawer.open .drawer-x,.main-nav.open .drawer-close');
+      if(x){x.click();return;}
+      if(document.body.classList.contains('nav-open')){var t=document.querySelector('.nav-toggle');if(t)t.click();return;}
+      if(bd)bd.click();
+    }
+  });
+  /* O1 copy-code feedback */
+  document.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('#copy-code,#copyCode,#copy-btn'):null;
+    if(!b)return;
+    var old=b.getAttribute('data-pz-old')||b.textContent;
+    b.setAttribute('data-pz-old',old); b.textContent='Copied';
+    setTimeout(function(){b.textContent=old;},1600);
+  });
+  /* O3 form message bars: gentle fade-in when a .msg gains text (no shake) */
+  var msgSeen=new WeakMap();
+  function scanMsg(){each('.msg',function(m){
+    var t=m.textContent.trim();
+    if(t&&msgSeen.get(m)!==t){msgSeen.set(m,t);m.classList.remove('pz-msg-in');void m.offsetWidth;m.classList.add('pz-msg-in');}
+  });}
+  scanMsg();
+  new MutationObserver(scanMsg).observe(document.body,{childList:true,subtree:true,characterData:true});
+  /* O4 tournaments filter/tab crossfade */
+  var list=document.querySelector('#tgrid');
+  if(list){setTimeout(function(){
+    new MutationObserver(function(){list.classList.remove('pz-swap');void list.offsetWidth;list.classList.add('pz-swap');}).observe(list,{childList:true});
+  },900);}
+  /* O2 room card: one-time gentle reveal only when credentials are shown (publish state) */
+  var room=document.querySelector('#room-area');
+  if(room){
+    var wrap=room.closest('.dpanel')||room;
+    function checkRoom(){
+      var t=room.textContent||'';
+      if(!/Reveals at match time/i.test(t)&&/(Room ID|Password)/i.test(t)&&t.trim().length>40){wrap.classList.add('pz-reveal');}
+    }
+    checkRoom();
+    new MutationObserver(checkRoom).observe(room,{childList:true,subtree:true,characterData:true});
+  }
+});
 })();
