@@ -230,7 +230,7 @@ tr:nth-child(even) td{background:#1a1a18}
 .pg-btn.active{background:var(--orange);border-color:var(--orange);color:#141414;font-weight:700}
 .pg-btn:disabled{opacity:.4;cursor:default}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:middle}
-.dot.ok{background:var(--green)}
+.dot.ok{background:var(--orange)}
 .dot.bad{background:var(--red)}
 .status.susp{color:var(--red)}
 td.acts{white-space:nowrap}
@@ -489,6 +489,10 @@ label{letter-spacing:.09em}
 @keyframes pzSwap{from{opacity:.45}to{opacity:1}}
 .pz-reveal{animation:pzReveal .5s ease-out}
 @keyframes pzReveal{from{opacity:.55;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
+
+/* ===== V1 riders (panel, 2026-11-20): notifications bell note ===== */
+.bell-wrap{position:relative;display:inline-flex}
+.bell-note{position:absolute;top:calc(100% + 8px);right:0;background:var(--panel2);border:1px solid var(--line2);color:var(--text);padding:10px 14px;font-size:14px;white-space:nowrap;z-index:60;box-shadow:0 10px 24px rgba(0,0,0,.5)}
 
 /* ===== Phone points P-01/P-02/P-03 (Snow phone check, 2026-11-20) ===== */
 @media(max-width:640px){
