@@ -2,7 +2,7 @@
 :root{
   --bg:#0d0d0d; --bg2:#131313; --panel:#171717; --panel2:#1e1e1c; --line:#3a3325; --line2:#6b5320;
   --amber:#f59e0b; --orange:#ff8c1a; --orange2:#ff7a00; --text:#f2ede3; --muted:#b8b0a0; --dim:#8a8378;
-  --green:#7ac74f; --red:#e05252;
+  --green:#7ac74f; --red:#e05252; --dim2:#b0a894;
   --head:'Oswald','Arial Narrow','Franklin Gothic Medium',Impact,sans-serif;
   --body:'Segoe UI',Arial,Helvetica,sans-serif;
 }
@@ -376,6 +376,81 @@ footer.site p{color:var(--muted);font-size:14px}
   .apanel td:first-child{background:#20201d}
   .foot-in{gap:16px;padding-top:18px}
 }
+
+/* ===== UI/UX round (Snow-approved analysis, 2026-11-20) ===== */
+/* V1-01: wider working column on very large screens */
+@media(min-width:1500px){.wrap,.hero-in,.stats-in,.foot-in,.demo-notice{max-width:1380px}}
+/* V1-03: footer follows content at a consistent distance */
+footer.site{margin-top:28px}
+.content{padding-bottom:12px}
+.dash-grid{padding-bottom:12px}
+/* V1-04: small label text one step brighter */
+.kv .k,.tcard .lab,.tcard .meta-line .lab,.side-box .cap,.foot-bottom,.demo-notice,table.stack td::before{color:var(--dim2)}
+label{letter-spacing:.09em}
+/* V1-05: two-tone headings on Admin */
+.admin-head h1{color:#f5efe0}
+.admin-head h1 span{color:var(--orange)}
+/* V1-06: footer columns even, on the container grid */
+.foot-in{grid-template-columns:1fr 1fr 1fr}
+/* V1-07: hero artwork reads on the right side */
+.hero::after{background:linear-gradient(90deg,rgba(13,13,11,.88) 0%,rgba(13,13,11,.45) 48%,rgba(13,13,11,.02) 80%)}
+/* V1-09: champions slider - no native scrollbar (arrows + progress line carry it) */
+.slider{scrollbar-width:none}
+.slider::-webkit-scrollbar{display:none}
+/* V1-10 + V1-11: one dashed frame treatment for both champion photos; shorter photo area, tighter meta */
+.champ-card .photo-frame{outline:1px dashed #4a4a2c;outline-offset:-9px}
+.champ-card .photo-frame,.champ-card .team-frame{min-height:150px}
+.champ-card .cmeta{padding:9px 16px}
+/* V1-12: event rows - name left, date right */
+.event-row .dt{margin-left:auto}
+/* V1-13: search sits inside the filter cluster */
+.filters .search{margin-left:0}
+/* V1-15: muted border by default; amber reserved for Registration Open */
+.tcard{border:1px solid var(--line)}
+.tcard.open{border:3px solid #7a5a1c}
+/* V1-16: sidebar captions on two lines, label over value */
+.side-box .cap span{display:block}
+.side-box .cap .cap-lab{font-size:12px;color:var(--dim2);letter-spacing:.07em}
+.side-box .cap .cap-val{font-size:14px;color:var(--text)}
+/* V1-02: tournament detail two-column top zone */
+.detail-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:start}
+@media(max-width:1000px){.detail-grid{grid-template-columns:1fr}}
+/* V1-02 + V1-27: form pages get a side steps panel */
+.form-grid2{display:grid;grid-template-columns:1fr 330px;gap:26px;align-items:start}
+.form-grid2>*{min-width:0}
+@media(max-width:1000px){.form-grid2{grid-template-columns:1fr}}
+.side-steps{background:var(--panel);border:1px solid var(--line);padding:20px}
+.side-steps h3{font-size:20px;color:var(--orange);margin-bottom:12px}
+.side-steps ol{list-style:none}
+.side-steps li{padding:8px 0 8px 22px;border-bottom:1px solid #26241e;position:relative;color:#ddd6c6;font-size:15px}
+.side-steps li::before{content:"";position:absolute;left:0;top:15px;width:9px;height:9px;background:var(--orange)}
+.side-steps li:last-child{border-bottom:0}
+/* V1-20: auth submit buttons share one baseline */
+.auth-split>div{display:flex;flex-direction:column}
+.auth-split form{display:flex;flex-direction:column;flex:1}
+.auth-split form .btn{margin-top:auto}
+/* V1-21: forgot-password link at standard link treatment */
+.forgot a{color:var(--amber);font-size:13px}
+/* V1-24: dashboard panels size to content */
+.dash-grid{align-items:start}
+/* V1-26: squad page team photo keeps a compact height */
+.squad-photo{min-height:110px!important}
+/* V1-28: join-code input reads as a code */
+.code-input{text-transform:uppercase;letter-spacing:.12em;font-size:16px;font-family:var(--head)}
+/* V1-31: media slots in their own panel, three in an even row */
+.media-grid.wide3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.media-grid.wide3{grid-template-columns:1fr}}
+/* V1-32: group headers as quiet labels with a hairline */
+.group-bar{background:transparent;color:var(--muted);border-left:0;border-bottom:1px solid #2c2a24;padding:7px 2px}
+/* V1-33: admin counts as a stat row */
+.counts{display:flex;flex-wrap:wrap;gap:0;margin-top:10px}
+.counts .cstat{padding:4px 20px;border-right:1px solid #4a463c;font-size:15px}
+.counts .cstat:first-child{padding-left:0}
+.counts .cstat:last-child{border-right:0}
+/* V1-36: client-information note box reads as a deliberate notice */
+.gap-box{border:1px solid var(--line2);background:#1d1a12;color:#cfc8b8}
+/* V1-37: terms reading text one size up, one shade brighter */
+.content.reading p{font-size:15px;color:#e6e0d0;line-height:1.65}
 
 /* ===== PlayZyro Animations R1 (panel-approved S1-S5 + O1-O4, Chat 3) =====
    Rules: content visible on load, entrance starts from visible, no scroll-reveal,
