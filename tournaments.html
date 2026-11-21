@@ -6,9 +6,9 @@
 <title>Tournaments & Schedule - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20n">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20o">
 <script>window.PZ_VARIANT='v1';</script>
-<script src="assets/js/app.js?v=2026-11-20n"></script>
+<script src="assets/js/app.js?v=2026-11-20o"></script>
 </head>
 <body>
 <header class="site-head"><div class="head-in">
@@ -38,8 +38,8 @@
 <div class="tgrid" id="tgrid"></div>
 </div>
 <aside class="side-box"><h3>Last Event Champions</h3>
-<div class="team-frame"><svg class="pf-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path transform="translate(-1.5 6) scale(.62)" opacity=".55" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path transform="translate(11.5 6) scale(.62)" opacity=".55" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="pf-lab">Team Photo</span><span class="pf-sub">To be provided by the client</span></div><p class="cap"><span class="cap-lab">Tournament Champions</span><span class="cap-val">Winner: To be confirmed</span></p>
-<div class="photo-frame"><svg class="pf-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span class="pf-lab">Winner Photo</span><span class="pf-sub">To be provided by the client</span></div><p class="cap"><span class="cap-lab">MVP of the Week</span><span class="cap-val">Winner: To be confirmed</span></p>
+<div class="team-frame has-art"><img class="pz-art" src="assets/img/art-poster-b.jpg" alt=""><span class="pf-lab">Team Artwork</span></div><p class="cap"><span class="cap-lab">Tournament Champions</span><span class="cap-val">Winner: To be confirmed</span></p>
+<div class="photo-frame has-art"><img class="pz-art" src="assets/img/art-champion.jpg" alt=""><span class="pf-lab">Champion Artwork</span></div><p class="cap"><span class="cap-lab">MVP of the Week</span><span class="cap-val">Winner: To be confirmed</span></p>
 </aside></div>
 <h2 class="sec-title" style="font-size:28px;margin-top:36px">Weekly <span>Schedule</span></h2>
 <div class="tbl-wrap stack-wrap"><table class="stack"><thead><tr><th>Date</th><th>Event Name</th><th>Game Mode</th><th>Map</th><th>Status</th><th>Action</th></tr></thead><tbody id="sched"></tbody></table></div>
@@ -96,11 +96,11 @@
     var modeOk = mode==='all' || (t.mode||'Squad')===mode;
     return tabOk && modeOk && t.name.toLowerCase().indexOf(q)>-1;
   });
-  document.getElementById('tgrid').innerHTML=list.map(function(t){
+  document.getElementById('tgrid').innerHTML=list.map(function(t,i){
    var btn = t.status==='Registration Open' ? '<a class="btn block" href="tournament.html?id='+t.id+'">Register Now</a>'
      : (isResult(t) ? '<a class="btn ghost block" href="tournament.html?id='+t.id+'">View Lobby</a>'
      : '<a class="btn ghost block" href="tournament.html?id='+t.id+'">View Details</a>');
-   return '<article class="tcard'+(t.status==='Registration Open'?' open':'')+'"><span class="fc" aria-hidden="true"></span><div class="poster-art"><svg class="art-emblem" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="rgba(16,16,12,.55)" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg><span class="art-cap">Tournament Poster</span></div><h3>'+PZ.esc(t.name)+'</h3>'+
+   return '<article class="tcard'+(t.status==='Registration Open'?' open':'')+'"><span class="fc" aria-hidden="true"></span><svg class="pz-corner" aria-hidden="true"><use href="assets/img/pz-icons.svg#pz-crosshair"/></svg><div class="poster-art"><img class="pz-art" src="'+PZ.posterFor(i)+'" alt=""><svg class="art-emblem" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="rgba(16,16,12,.55)" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg><span class="art-cap">Tournament Poster</span></div><h3>'+PZ.esc(t.name)+'</h3>'+
    '<div class="meta-line"><span class="lab">Status</span><span class="val amber">'+PZ.esc(t.status)+'</span></div>'+
    '<div class="meta-line"><span class="lab">Start Date</span><span class="val">'+PZ.esc(t.dateText||'To be confirmed')+'</span></div>'+
    '<div class="meta-line"><span class="lab">Prize Pool</span><span class="val">TBD</span></div>'+

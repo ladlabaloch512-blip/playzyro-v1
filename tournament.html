@@ -6,9 +6,9 @@
 <title>Tournament - PlayZyro</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z' fill='%23111' stroke='%23f59e0b' stroke-width='3'/%3E%3Cpath d='M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z' fill='%23ff8c1a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20n">
+<link rel="stylesheet" href="assets/css/style.css?v=2026-11-20o">
 <script>window.PZ_VARIANT='v1';</script>
-<script src="assets/js/app.js?v=2026-11-20n"></script>
+<script src="assets/js/app.js?v=2026-11-20o"></script>
 </head>
 <body>
 <header class="site-head"><div class="head-in">
@@ -65,7 +65,7 @@
  if(!t){box.innerHTML='<h1 class="sec-title">Tournament not found</h1><div class="empty">This tournament is not in the list. <a href="tournaments.html">Back to Tournaments</a></div>';return;}
  var applied=PZ.appliedSquadIds(t.id).length, assigned=PZ.assignedSquadIds(t.id).length;
  box.innerHTML='<h1 class="sec-title">'+PZ.esc(t.name)+'</h1>'+
- '<div class="detail-grid"><div class="dpanel"><div class="poster-art tall"><svg class="art-emblem" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="rgba(16,16,12,.55)" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg><span class="art-cap">Tournament Poster · Artwork to be provided by the client</span></div></div>'+
+ '<div class="detail-grid"><div class="dpanel"><div class="poster-art tall"><img class="pz-art" src="assets/img/art-poster-a.jpg" alt=""><svg class="art-emblem" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 1 L37 7 V21 C37 33 29 39 20 43 C11 39 3 33 3 21 V7 Z" fill="rgba(16,16,12,.55)" stroke="#f59e0b" stroke-width="2.5"/><path d="M10.5 10 H29.5 V16 L20.8 26.5 H29.5 V33 H10.5 V27 L19.2 16.5 H10.5 Z" fill="#ff8c1a"/></svg><span class="art-cap">Tournament Poster · Artwork to be provided by the client</span></div></div>'+
  '<div class="dpanel"><div class="kv"><span class="k">Status</span><span class="v">'+PZ.esc(t.status)+'</span></div>'+
  '<div class="kv"><span class="k">Date</span><span class="v">'+PZ.esc(t.dateText||'Date to be confirmed')+'</span></div>'+
  (t.timeText?'<div class="kv"><span class="k">Time</span><span class="v">'+PZ.esc(t.timeText)+'</span></div>':'')+
